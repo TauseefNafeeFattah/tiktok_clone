@@ -74,7 +74,7 @@ const VideoCard: NextPage<IProps> = ({ post }) =>{
         >
           <Link href ={`/detail/${post._id}`}>
             <div>
-              <p class="mt-3 mb-3 cursor-pointer">{post.caption.slice(0, 50)}{post.caption.length > 50 && <p className="text-s text-gray-500">  ...showmore</p>}</p>
+              <p className="mt-3 mb-3 cursor-pointer">{post.caption.slice(0, 50)}{post.caption.length > 50 && <p className="text-s text-gray-500">  ...showmore</p>}</p>
               <video
                 loop
                 ref={videoRef}
