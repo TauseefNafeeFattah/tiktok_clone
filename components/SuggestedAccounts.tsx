@@ -18,32 +18,9 @@ const SuggestedAccounts: NextPage<IProps> = ({ fetchAllUsers, allUsers }) => {
 
   const { userProfile }: any = useAuthStore();
 
-  function shuffle(array)
-  {
-    let currentIndex = array.length,  randomIndex;
-
-    // While there remain elements to shuffle.
-    while (currentIndex != 0) {
-
-      // Pick a remaining element.
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex--;
-
-      // And swap it with the current element.
-      [array[currentIndex], array[randomIndex]] = [
-        array[randomIndex], array[currentIndex]];
-  }
-
-  return array;
-}
   const filterUsers = allUsers?.filter((user) => user._id !== userProfile?._id)
 
   const users = filterUsers?.sort(() => 0.5 - Math.random()).slice(0, allUsers.length);
-
-  // if (filterUsers){
-  //   shuffle(filterUsers);
-  // }
-  // const users = filterUsers?.slice(0, allUsers.length);
 
 
   return (
