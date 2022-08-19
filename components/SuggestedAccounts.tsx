@@ -44,8 +44,7 @@ const SuggestedAccounts: NextPage<IProps> = ({ fetchAllUsers, allUsers }) => {
   if (filterUsers){
     shuffle(filterUsers);
   }
-  const users = filterUsers?
-    .slice(0, allUsers.length);
+  const users = filterUsers?.slice(0, allUsers.length);
 
 
   return (
