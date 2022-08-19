@@ -38,13 +38,12 @@ const SuggestedAccounts: NextPage<IProps> = ({ fetchAllUsers, allUsers }) => {
 }
   const filterUsers = allUsers?.filter((user) => user._id !== userProfile?._id)
 
-  // const users = filterUsers?
-  //   .sort(() => 0.5 - Math.random())
-  //   .slice(0, allUsers.length);
-  if (filterUsers){
-    shuffle(filterUsers);
-  }
-  const users = filterUsers?.slice(0, allUsers.length);
+  const users = filterUsers?.sort(() => 0.5 - Math.random()).slice(0, allUsers.length);
+
+  // if (filterUsers){
+  //   shuffle(filterUsers);
+  // }
+  // const users = filterUsers?.slice(0, allUsers.length);
 
 
   return (
