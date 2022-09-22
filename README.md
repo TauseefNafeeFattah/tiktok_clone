@@ -4,3 +4,4 @@
 3. Edit a post and comment
 4. integrate a post recommendation engine (machine learning) (have to add ability to add multiple hashtag/category)
 5. integrate a suggested account recommendation engine
+6. Improve overall design
