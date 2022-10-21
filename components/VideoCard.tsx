@@ -41,10 +41,7 @@ const VideoCard: NextPage<IProps> = ({ posts }) =>{
   const { userProfile }: any = useAuthStore();
   const [showShareDialogue, setShowShareDialogue] = useState(false);
   const router = useRouter();
-  const sameUser = (userProfile._id == post.postedBy._id)
-  console.log(sameUser)
-  console.log(userProfile)
-  console.log(post.postedBy)
+  const sameUser = (userProfile._id == post.postedBy._id);
   const onVideoPress = () => {
     if(playing){
       videoRef?.current?.pause();
@@ -106,7 +103,7 @@ const VideoCard: NextPage<IProps> = ({ posts }) =>{
               </>
             </Link>
           </div>
-          <div className="flex flex-row ">
+          <div className="flex flex-row">
             <Link href={`/profile/${post?.postedBy._id}`}>
               <div className="flex flex-col gap-2">
                 <p className="flex gap-2 items-center md:text-md font-bold text-primary">

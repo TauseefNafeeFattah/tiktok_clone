@@ -42,6 +42,8 @@ const Detail = ({ postDetails }: IProps) => {
   const { autofocusQuery } = router.query;
   const { userProfile }: any = useAuthStore();
   const [showShareDialogue, setShowShareDialogue] = useState(false);
+
+  const sameUser = (userProfile._id == post.postedBy._id);
   let autofocus;
   if (autofocusQuery){
     autofocus = true
@@ -159,7 +161,7 @@ const Detail = ({ postDetails }: IProps) => {
                 </>
               </Link>
             </div>
-            <div>
+            <div className="flex flex-row">
               <Link href={`/profile/${post.postedBy._id}`}>
                 <div className="mt-3 flex flex-col gap-2">
                   <p className="flex gap-2 items-center md:text-md font-bold text-primary">
@@ -171,6 +173,21 @@ const Detail = ({ postDetails }: IProps) => {
                   </p>
                 </div>
               </Link>
+              { sameUser ? (
+                <div  className="flex flex-row gap-4 ml-36 mt-4 place-content-end">
+                  <div className="hover:text-red-500" onClick={() => handleDelete()}>
+                    Delete
+                  </div>
+                  <div>|</div>
+                  <Link href ={`/edit/${post._id}`}>
+                    <div className="hover:text-blue-500">
+                      Edit
+                    </div>
+                  </Link>
+                </div>
+              ):(
+                <div></div>
+              )}
             </div>
           </div>
           <p className="mt-5 px-10 text-lg text-gray-600">
