@@ -10,7 +10,7 @@ export default async function handler(
   if (req.method === 'PUT'){
 
     const { userId, postId, like} = req.body;
-
+    
     const data = like ? await client
                               .patch(postId)
                               .setIfMissing({ likes: [] })

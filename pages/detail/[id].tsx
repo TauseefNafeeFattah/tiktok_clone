@@ -12,6 +12,20 @@ import useAuthStore from '../../store/authStore';
 import LikeButton from '../../components/LikeButton';
 import Comments from '../../components/Comments';
 import { BASE_URL } from '../../utils';
+import { FaCommentDots } from 'react-icons/fa';
+
+import {FaShare} from 'react-icons/fa';
+import {
+  FacebookShareButton,
+  RedditShareButton,
+  TwitterShareButton,
+  WhatsappShareButton,
+  FacebookIcon,
+  FacebookMessengerIcon,
+  RedditIcon,
+  TwitterIcon,
+  WhatsappIcon,
+} from "next-share";
 
 interface IProps {
   postDetails: Video,
@@ -25,8 +39,16 @@ const Detail = ({ postDetails }: IProps) => {
   const [comment,setComment] = useState('');
   const videoRef = useRef<HTMLVideoElement>(null);
   const router = useRouter();
+  const { autofocusQuery } = router.query;
   const { userProfile }: any = useAuthStore();
-
+  const [showShareDialogue, setShowShareDialogue] = useState(false);
+  let autofocus;
+  if (autofocusQuery){
+    autofocus = true
+  }
+  else{
+    autofocus = false
+  }
   const onVideoClick = () => {
     if(playing){
       videoRef?.current?.pause();
@@ -156,11 +178,45 @@ const Detail = ({ postDetails }: IProps) => {
           </p>
           <div className="px-10">
             {userProfile && (
-              <LikeButton
-                likes={post.likes}
-                handleLike={() => handleLike(true)}
-                handleDislike={() => handleLike(false)}
-              />
+              <div className="flex flex-row gap-28 justify-center items-center px-5">
+                <div className="mt-1">
+                  <LikeButton
+                    likes={post.likes}
+                    handleLike={() => handleLike(true)}
+                    handleDislike={() => handleLike(false)}
+                  />
+                </div>
+
+                <div>
+                  <FaShare onClick={()=>setShowShareDialogue(!showShareDialogue)} className="mb-1 cursor-pointer" color="black" fontSize={21} />
+                </div>
+              </div>
+            )}
+            {showShareDialogue && (
+              <div className="flex flex-row gap-6 justify-center items-center border-t-2 border-gray-200 p-4">
+                <FacebookShareButton
+                  url={window.location.href}
+                >
+                  <FacebookIcon size={32} round />
+                </FacebookShareButton>
+
+                <TwitterShareButton
+                  url={window.location.href}
+                >
+                  <TwitterIcon size={32} round />
+                </TwitterShareButton>
+                <RedditShareButton
+                  url={window.location.href}
+                >
+                  <RedditIcon size={32} round />
+                </RedditShareButton>
+                <WhatsappShareButton
+                  url={window.location.href}
+                >
+                  <WhatsappIcon size={32} round />
+                </WhatsappShareButton>
+                <MdOutlineCancel onClick={()=>setShowShareDialogue(false)} color="red" fontSize={32}/>
+              </div>
             )}
           </div>
           <Comments
@@ -169,6 +225,7 @@ const Detail = ({ postDetails }: IProps) => {
             addComment={addComment}
             comments={post.comments}
             isPostingComment={isPostingComment}
+            autofocus={autofocus}
            />
         </div>
       </div>

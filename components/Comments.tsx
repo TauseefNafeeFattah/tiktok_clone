@@ -6,6 +6,7 @@ import useAuthStore from '../store/authStore';
 import NoResults from './NoResults';
 import { IUser } from '../types';
 interface IProps {
+  autofocus:Boolean;
   isPostingComment: Boolean;
   comment:string;
   setComment: Dispatch<SetStateAction<string>>;
@@ -20,7 +21,7 @@ interface IComment {
   postedBy: { _ref: string; _id:string };
 }
 
-const Comments = ({ comment, setComment, addComment, comments, isPostingComment}: IProps) => {
+const Comments = ({ comment, setComment, addComment, comments, isPostingComment, autofocus}: IProps) => {
 
   const { userProfile, allUsers } = useAuthStore();
 
@@ -73,13 +74,14 @@ const Comments = ({ comment, setComment, addComment, comments, isPostingComment}
           <div>
             <form onSubmit={addComment} className="gap-4 inline">
               <input
+                autoFocus = {autofocus}
                 value={comment}
                 onChange={(e) => {setComment(e.target.value)}}
                 placeholder="Add comment..."
-                className="w-5/6 bg-primary px-6 py-4 text-md font-medium border-2 border-gray-100 focus:outline-none focus:border-2 focus:border-gray-300 flex-1 rounded-lg"
+                className="w-4/6 bg-primary px-6 py-4 text-md font-medium border-2 border-gray-100 focus:outline-none focus:border-2 focus:border-gray-300 flex-1 rounded-lg"
               />
             </form>
-            <button className="inline text-md text-gray-400 w-1/6" onClick={addComment}>
+            <button className="inline text-md text-gray-400 ml-10 rounded bg-blue py-2 w-1/6" onClick={addComment}>
               {isPostingComment ? 'Commenting...' : 'Comment'}
             </button>
           </div>
